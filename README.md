@@ -17,8 +17,6 @@ In recent years, advancements in language modeling have led to the development o
 - **PaliGemma**, inspired by PaLI-3, integrates the SigLIP vision model and the Gemma language model, focusing on multimodal pretraining and high-resolution tasks to balance performance and efficiency .
 - **Frozen** and **MiniGPT-4** effectively align visual features with text token embeddings, reducing computational requirements and enhancing versatility  .
 
-
-
 While these models are highly efficient, their large number of parameters often prevents their use in low-compute environments or for tasks that can be achieved with fewer parameters. This highlights the need for smaller models tailored to specific tasks, which can still perform well without requiring extensive computational resources.
 
 ## MODA - Multimodal Object Description Assistant
@@ -46,22 +44,24 @@ The dataset's high-resolution images and metadata support better product organiz
 
 ### MODA Architecture
 
+MODA (Multimodal Object Description Assistant) uses a specialized architecture to generate detailed descriptions of fashion items by combining FashionCLIP for image encoding and OPT-125M as decoder for text generation. Its non-linear projection increases and then reduces the dimensionality of image embeddings, capturing complex patterns and enhancing representation quality. This approach allows MODA to deliver high accuracy in fashion-specific tasks with only 280 million parameters, making it highly efficient and capable of running without a GPU.
 
 <p align="center">
   <img width="700" alt="Architecture" src="https://github.com/user-attachments/assets/43b201d3-b1ee-402d-9a4a-2a6f66c2476d">
 </p> 
 
+In comparison, models like LLaVA and PaLI adopt a more versatile approach, leveraging pretrained backbones to align visual and textual modalities for a wide range of tasks. LLaVA integrates CLIP and Vicuna with a simple linear projection for efficient resource utilization, while PaLI combines ViT and mT5 models to support over 100 languages. PaliGemma follows a similar strategy with multimodal pretraining and high-resolution tasks, balancing performance and computational efficiency (Google AI, 2023). MODA’s non-linear projection method provides a distinct advantage in capturing intricate visual details, enhancing its performance in generating accurate and detailed descriptions compared to the linear projections used by other models.
+
 
 ### Training
 
-The MODA model is designed to generate detailed descriptions for fashion items by integrating visual and textual data. This hybrid approach leverages the capabilities of both the FashionCLIP[1] model and the OPT-125M[3] language model. The FashionCLIP[1] model processes the input image to generate an image embedding, which is then projected to a suitable size through a non-linear projection layer. Simultaneously, the OPT[3] tokenizer converts the text description into token embeddings. These image and text embeddings are combined into a sequence of embeddings, which are then fed into the OPT-125M[3] model. This pre-trained transformer model processes the combined embeddings to generate or refine the descriptive text, enhancing the detail and accuracy of fashion item descriptions.
-
+The training of the MODA model aims to optimize its ability to generate detailed descriptions of fashion items by effectively integrating visual and textual data. The process starts with the FashionCLIP[1] model, which processes the input image to generate an embedding. This embedding is then projected to a suitable size through a non-linear projection layer, enhancing its representation quality. Simultaneously, the OPT[3] tokenizer converts the text description (image label) into token embeddings. These image and text embeddings are combined into a sequence and fed into the OPT-125M[3] model, a pre-trained transformer, to predict the next token in the sequence. Then, the model's prediction performance is evaluated using the CrossEntropy loss function.
 
 <p align="center">
   <img width="1000" alt="Training Scheme" src="https://github.com/user-attachments/assets/9f846bb8-13c5-413b-8de6-7e05677879ae">
 </p> 
 
-The training process employs the AdamW optimizer with a learning rate of 1e-3, and the learning rate is adjusted using a StepLR scheduler. During training, similar to LLaVA, the FashionCLIP[1] encoder had its parameters frozen, and only the non-linear projection and the language model were trained. The CrossEntropyLoss function is used to compute the loss, and training is conducted on a CUDA-enabled GPU when available. The model is trained for 20 epochs, taking 1 hour and 44 minutes to train on a Google Colab A100, with gradient accumulation and periodic model saving to ensure stability and performance.
+The training process employs the AdamW optimizer with a learning rate of 1e-3, and the learning rate is adjusted using a StepLR scheduler. During training, similar to LLaVA, the FashionCLIP[1] encoder had its parameters frozen, and only the non-linear projection and the language model were trained. The model is trained for 20 epochs, taking 1 hour and 44 minutes to train on a Google Colab A100, with gradient accumulation and periodic model saving to ensure stability and performance.
 
 <p align="center">
   <img width="700" alt="Training Chart" src="https://github.com/user-attachments/assets/85813aac-d8a0-4c7e-9ef9-fb81f5f62b3d">
