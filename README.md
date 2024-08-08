@@ -33,6 +33,16 @@ MODA (Multimodal Object Description Assistant) addresses the need for specialize
 
 MODA is built using FashionCLIP[1], a model that integrates the capabilities of CLIP (Contrastive Language-Image Pre-training)[2] with fashion-specific datasets, and OPT (Open Pre-trained Transformers)[3] from Meta, a large language model. By leveraging these advanced technologies, MODA provides precise and detailed descriptions of various fashion objects, demonstrating the effectiveness of combining state-of-the-art image and text models for specialized applications.
 
+### Product Image Dataset for E-commerce Applications
+
+This dataset contains over 2900 product images, categorized under Apparel and Footwear, and includes items for Boys, Girls, Men, and Women. The dataset includes a `fashion.csv` file with metadata such as title, description, category, and gender. It is suitable for various applications like category classification, visual similarity-based recommendation systems, custom named entity recognition for attributes like color and gender.
+
+<p align="center">
+  <img width="700" alt="Dataset" src="https://github.com/user-attachments/assets/ad1b3888-8c72-4362-babf-ac79382bb0f7">
+</p> 
+
+The dataset's high-resolution images and metadata support better product organization and customer recommendations on e-commerce platforms. This dataset is a useful for developing machine learning models and algorithms focused on improving product image recognition and recommendation systems. For more information and access, visit the [dataset page](https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images/data).
+
 
 ### MODA Architecture
 
