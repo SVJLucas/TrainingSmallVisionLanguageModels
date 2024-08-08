@@ -33,13 +33,13 @@ MODA is built using FashionCLIP[17], a model that integrates the capabilities of
 
 ### Product Image Dataset for E-commerce Applications
 
-This dataset contains over 2900 product images, categorized under Apparel and Footwear, and includes items for Boys, Girls, Men, and Women. The dataset includes a `fashion.csv` file with metadata such as title, description, category, and gender. It is suitable for various applications like category classification, visual similarity-based recommendation systems, custom named entity recognition for attributes like color and gender. Bellow, some samples:
+This dataset contains over 2900 product images, categorized under Apparel and Footwear, and includes items for Boys, Girls, Men, and Women. The dataset includes a `fashion.csv` file with metadata such as title, description, category, and gender. It is suitable for various applications like category classification, visual similarity-based recommendation systems, custom named entity recognition for attributes like color and gender. Bellow, there are some samples from the [Image Dataset for E-commerce Applications](https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images/data):
 
 <p align="center">
   <img width="700" alt="Dataset" src="https://github.com/user-attachments/assets/ad1b3888-8c72-4362-babf-ac79382bb0f7">
 </p> 
 
-The dataset's high-resolution images and metadata support better product organization and customer recommendations on e-commerce platforms. This dataset is a useful for developing machine learning models and algorithms focused on improving product image recognition and recommendation systems. For more information and access, visit the [dataset page](https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images/data).
+The dataset's high-resolution images and metadata support better product organization and customer recommendations on e-commerce platforms. This dataset is a useful for developing machine learning models and algorithms focused on improving product image recognition and recommendation systems.
 
 
 ### MODA Architecture
@@ -50,18 +50,18 @@ MODA (Multimodal Object Description Assistant) uses a specialized architecture t
   <img width="700" alt="Architecture" src="https://github.com/user-attachments/assets/43b201d3-b1ee-402d-9a4a-2a6f66c2476d">
 </p> 
 
-In comparison, models like LLaVA[6] and PaLI[7] adopt a more versatile approach, leveraging pretrained backbones to align visual and textual modalities for a wide range of tasks. LLaVA[6] integrates CLIP[8] and Vicuna[9] with a simple linear projection for efficient resource utilization, while PaLI combines ViT and mT5 models also via linear transformation. PaliGemma follows a similar strategy with multimodal pretraining and high-resolution. MODA’s non-linear projection method provides a distinct advantage in capturing intricate visual details, enhancing its performance in generating accurate and detailed descriptions compared to the linear projections used by other models.
+In comparison, models like LLaVA[6] and PaLI[7] adopt a more versatile approach, leveraging pretrained backbones to align visual and textual modalities for a wide range of tasks. LLaVA[6] integrates CLIP[8] and Vicuna[9] with a simple linear projection for efficient resource utilization, while PaLI combines Vision Transformers (ViT)[10] and mT5[11] models also via linear transformation for the same reason. Since MODA is a small model, the use of non-linearity does not impact resource utilization significantly. MODA’s non-linear projection method provides a distinct advantage in capturing intricate visual details, enhancing its performance in generating accurate and detailed descriptions compared to the linear projections used by other models.
 
 
 ### Training
 
-The training of the MODA model aims to optimize its ability to generate detailed descriptions of fashion items by effectively integrating visual and textual data. The process starts with the FashionCLIP[1] model, which processes the input image to generate an embedding. This embedding is then projected to a suitable size through a non-linear projection layer, enhancing its representation quality. Simultaneously, the OPT[3] tokenizer converts the text description (image label) into token embeddings. These image and text embeddings are combined into a sequence and fed into the OPT-125M[3] model, a pre-trained transformer, to predict the next token in the sequence. Then, the model's prediction performance is evaluated using the CrossEntropy loss function.
+The training of the MODA model aims to optimize its ability to generate detailed descriptions of fashion items by effectively integrating visual and textual data. The process starts with the FashionCLIP[17] model, which processes the input image to generate an embedding. This embedding is then projected to a suitable size through a non-linear projection layer, enhancing its representation quality. Simultaneously, the OPT[18] tokenizer converts the text description (image label) into token embeddings. These image and text embeddings are combined into a sequence and fed into the OPT-125M[18] model, a pre-trained transformer, to predict the next token in the sequence. Then, the model's prediction performance is evaluated using the CrossEntropy loss function.
 
 <p align="center">
   <img width="1000" alt="Training Scheme" src="https://github.com/user-attachments/assets/9f846bb8-13c5-413b-8de6-7e05677879ae">
 </p> 
 
-The training process employs the AdamW optimizer with a learning rate of 1e-3, and the learning rate is adjusted using a StepLR scheduler. During training, similar to LLaVA, the FashionCLIP[1] encoder had its parameters frozen, and only the non-linear projection and the language model were trained. The model is trained for 20 epochs, taking 1 hour and 44 minutes to train on a Google Colab A100, with gradient accumulation and periodic model saving to ensure stability and performance.
+The training process uses the AdamW[19] optimizer, which starts with a learning rate of 1e-3. To ensure the training is efficient, the learning rate is periodically reduced, dropping by a fixed percentage at regular intervals. During training, similar to LLaVA[6], the FashionCLIP[17] encoder had its parameters frozen, and only the non-linear projection and the language model were trained. The model is trained for 20 epochs, taking 1 hour and 44 minutes to train on a Google Colab A100, with gradient accumulation and periodic model saving to ensure stability and performance.
 
 <p align="center">
   <img width="700" alt="Training Chart" src="https://github.com/user-attachments/assets/85813aac-d8a0-4c7e-9ef9-fb81f5f62b3d">
@@ -107,23 +107,6 @@ The training chart shows a sharp decline in both training and validation losses 
     
 18. Zhang, S., Roller, S., Goyal, N., Artetxe, M., Chen, M., Chen, S., Dewan, C., Diab, M., Li, X., Lin, X.V., Mihaylov, T., Ott, M., Shleifer, S., Shuster, K., Simig, D., Koura, P.S., Sridhar, A., Wang, T., Zettlemoyer, L. (2022). OPT: Open Pre-trained Transformer Language Models. arXiv preprint arXiv:2205.01068. [https://arxiv.org/abs/2205.01068](https://arxiv.org/abs/2205.01068)
 
+19. Loshchilov, I., Hutter, F. (2019). Decoupled Weight Decay Regularization. arXiv preprint arXiv:1711.05101. [https://arxiv.org/abs/1711.05101](https://arxiv.org/abs/1711.05101)
 
-
-
-
-
-
-16. Tsimpoukelli, M., Menick, J.L., Cabi, S., Eslami, S.M., Vinyals, O., Hill, F. Multimodal few-shot learning with frozen language models. Advances in Neural Information Processing Systems, 34, 200–212 (2021). [https://proceedings.neurips.cc/paper_files/paper/2021/file/6dcf277ea32ce3288914faf369fe6de0-Paper-Conference.pdf](https://proceedings.neurips.cc/paper_files/paper/2021/file/6dcf277ea32ce3288914faf369fe6de0-Paper-Conference.pdf)
-
-
-
-2. Radford, A., Kim, J.W., Hallacy, C., Ramesh, A., Goh, G., Agarwal, S., Sastry, G., Askell, A., Mishkin, P., Clark, J., Krueger, G., Sutskever, I. (2021). Learning Transferable Visual Models From Natural Language Supervision. arXiv preprint arXiv:2103.00020. [https://arxiv.org/abs/2103.00020](https://arxiv.org/abs/2103.00020)
-
-   
-5. Chen, J., Zhu, D., Shen, X., Li, X., Liu, Z., Zhang, P., Krishnamoorthi, R., Chandra, V., Xiong, Y., Elhoseiny, M. MiniGPT-v2: large language model as a unified interface for vision-language multi-task learning. arXiv preprint arXiv:2310.09478 (2023). [https://arxiv.org/abs/2310.09478](https://arxiv.org/abs/2310.09478)
-6. 
-7. 
-  
-8. Tsimpoukelli, M., Menick, J.L., Cabi, S., Eslami, S.M., Vinyals, O., Hill, F. Multimodal few-shot learning with frozen language models. Advances in Neural Information Processing Systems, 34, 200–212 (2021). [https://proceedings.neurips.cc/paper_files/paper/2021/file/6dcf277ea32ce3288914faf369fe6de0-Paper-Conference.pdf](https://proceedings.neurips.cc/paper_files/paper/2021/file/6dcf277ea32ce3288914faf369fe6de0-Paper-Conference.pdf)
-9. Zhu, D., Chen, J., Shen, X., Li, X., Elhoseiny, M. MiniGPT-4: Enhancing vision-language understanding with advanced large language models. arXiv preprint arXiv:2304.10592 (2023). [https://arxiv.org/abs/2304.10592](https://arxiv.org/abs/2304.10592)
 
