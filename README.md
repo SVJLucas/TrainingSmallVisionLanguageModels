@@ -31,19 +31,105 @@ MODA (Multimodal Object Description Assistant) addresses the need for specialize
 
 MODA is built using FashionCLIP[17], a model that integrates the capabilities of CLIP (Contrastive Language-Image Pre-training)[8] with fashion-specific datasets, and OPT (Open Pre-trained Transformers)[18] from Meta, a language model. By leveraging these advanced technologies, MODA provides precise and detailed descriptions of various fashion objects, demonstrating the effectiveness of combining state-of-the-art image and text models for specialized applications.
 
-## Product Image Dataset for E-commerce Applications
 
-This dataset contains over 2900 product images, categorized under Apparel and Footwear, and includes items for Boys, Girls, Men, and Women. The dataset includes a `fashion.csv` file with metadata such as title, description, category, and gender. It is suitable for various applications like category classification, visual similarity-based recommendation systems, custom named entity recognition for attributes like color and gender. Bellow, there are some samples from the [Image Dataset for E-commerce Applications](https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images/data):
+## Understanding the Dataset Creation Pipeline
+
+Creating high-quality datasets is crucial for training machine learning models, especially in specialized domains like fashion. The dataset creation pipeline illustrated below demonstrates a multi-step process that leverages advanced models like Phi-3 Vision and Phi-3 Instruct to produce refined and structured datasets.
 
 <p align="center">
   <img width="700" alt="Dataset Pipeline" src="https://github.com/user-attachments/assets/ff2f586d-50ac-4c7c-8cd6-327a043d9174">
 </p> 
 
-### 1. Analyzing the Image with Phi-3 Vision
+### Step 1: **Generating an Initial Image Description with Phi-3 Vision**
 
 <p align="center">
   <img width="700" alt="Dataset" src="https://github.com/user-attachments/assets/0ca50ae0-5b0c-4129-bcf2-3481b4307234">
 </p> 
+
+
+The first step in the dataset creation pipeline leverages the power of Phi-3 Vision to generate concise and structured descriptions of fashion items directly from images. This process is based on the principle of Datafree distillation, which aims to create synthetic datasets by extracting the most relevant attributes of a fashion item, such as its gender association, category, color, and intended usage. The approach focuses solely on the item itself, deliberately ignoring unnecessary details like the person wearing the item or any visible text within the image. This ensures that the resulting descriptions are both clear and focused, capturing only the essential characteristics of the item. To guide Phi-3 Vision in this task, the item image is combined with a carefully crafted template, shown bellow:
+
+```html
+<|user|>
+
+<|image_1|>
+
+Analyze the image and provide a concise description of the fashion item it contains. Focus solely on the item,
+not the person wearing or using it, and concentrate on the most prominent or important item in the image.
+The description should include details such as gender, category, subcategory, product type, color, and usage.
+The output should be in the following JSON format, where the description is a brief text string:
+
+Exemple 1:
+
+{
+  "description": "A pink women's blouse with lace trim, perfect for formal occasions."
+}
+
+
+Exemple 2:
+
+
+{
+  "description": "Black men's casual leather shoes, ideal for everyday use."
+}
+
+
+Exemple 3:
+
+{
+  "description": "Gold girls' necklace with a heart pendant, suitable for parties."
+}
+
+
+Please ensure the description is concise, capturing the essential attributes of the fashion item, and
+formatted as plain text within a JSON structure, following the provided examples.
+
+Do not write the text that is in the image. For exemple, if some text is in the image, ignore it.
+
+<|end|>
+<|assistant|>
+```
+
+This prompt instructs the model to analyze the image and produce a brief yet comprehensive description that encapsulates the item's key features. The output is formatted in a simple JSON structure, making it easy to integrate into various data processing or machine learning workflows. For example, Phi-3 Vision might generate a description like "A pink women's blouse with lace trim, perfect for formal occasions," capturing the item's color, gender association, and appropriate usage.
+
+- **Why it Matters:** By generating these initial descriptions using a model licensed under MIT, such as Phi-3 Vision, we can use the outputs as training data for other Vision-Language Models (VLMs). Phi-3 Vision works by extracting visual features from the image and converting them into concise textual descriptions. This process not only ensures that the dataset is highly relevant and accurate, but it also provides a robust foundation for further refinement and enhancement. The transformation of raw image data into structured, machine-readable descriptions is essential for training AI models.
+
+However, **it’s important to note that Phi-3 Vision was initially trained with a strong focus on Optical Character Recognition (OCR)**, look at one of its outputs:
+
+
+
+
+This presents a challenge because the inclusion of text from the image is not desired in our model's outputs. The presence of OCR-derived text could complicate the training process and lead to less accurate descriptions. To address this, we incorporate an additional step where Phi-3 Instruct is used. This model utilizes metadata to refine the initial descriptions, ensuring that any OCR text inadvertently captured by Phi-3 Vision is removed, thereby aligning the final dataset with our specific goals.
+
+
+
+## Step 3: **Enhancing the Description with Prompt II and Metadata**
+
+The description generated by Phi-3 Vision is then combined with a second template, "Prompt II," and additional item metadata. This metadata includes critical details such as the item's gender association, master category, subcategory, article type, and usage.
+
+- **Why it Matters:** This step enriches the initial description with additional context and details that may not be visible in the image but are essential for accurate categorization and understanding.
+
+#### Step 4: **Refining the Description with Phi-3 Instruct**
+
+Next, the combined data (image description, Prompt II, and metadata) is fed into Phi-3 Instruct. This model refines the initial description, ensuring that it aligns perfectly with the metadata and fully meets the dataset's requirements.
+
+- **Why it Matters:** Phi-3 Instruct provides a deeper level of analysis and refinement, ensuring that the final descriptions are both accurate and comprehensive, making them suitable for advanced machine learning tasks.
+
+#### Step 5: **Creating the Final Dataset**
+
+Finally, the refined item description is paired with the original item image to form the final dataset. This dataset is now ready for use in various applications, such as training AI models, product recommendation systems, or cataloging.
+
+- **Why it Matters:** The final dataset, consisting of both high-quality images and precisely refined descriptions, is a valuable resource for any data-driven application in the fashion industry.
+
+By following this pipeline, we can ensure the creation of datasets that are not only detailed and accurate but also easy to integrate into various machine learning and data processing workflows.
+
+
+This dataset contains over 2900 product images, categorized under Apparel and Footwear, and includes items for Boys, Girls, Men, and Women. The dataset includes a `fashion.csv` file with metadata such as title, description, category, and gender. It is suitable for various applications like category classification, visual similarity-based recommendation systems, custom named entity recognition for attributes like color and gender. Bellow, there are some samples from the [Image Dataset for E-commerce Applications](https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images/data):
+
+
+
+### 1. Analyzing the Image with Phi-3 Vision
+
 
 The approach of Datafree distillation using Phi-3 Vision focuses on generating synthetic datasets by creating concise, structured descriptions of fashion items from images. This method involves analyzing an image to extract the most relevant attributes of a fashion item, such as its gender association, category, color, and intended usage. The goal is to produce a clear and concise textual description that accurately represents the item without including unnecessary details, such as the person wearing the item or any text within the image. The descriptions are formatted in a simple JSON structure, which makes them easy to integrate into various data processing or machine learning workflows. Below is the prompt used to instruct Phi-3 Vision in generating these descriptions:
 
