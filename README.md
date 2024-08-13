@@ -31,15 +31,65 @@ MODA (Multimodal Object Description Assistant) addresses the need for specialize
 
 MODA is built using FashionCLIP[17], a model that integrates the capabilities of CLIP (Contrastive Language-Image Pre-training)[8] with fashion-specific datasets, and OPT (Open Pre-trained Transformers)[18] from Meta, a language model. By leveraging these advanced technologies, MODA provides precise and detailed descriptions of various fashion objects, demonstrating the effectiveness of combining state-of-the-art image and text models for specialized applications.
 
-### Product Image Dataset for E-commerce Applications
+## Product Image Dataset for E-commerce Applications
 
 This dataset contains over 2900 product images, categorized under Apparel and Footwear, and includes items for Boys, Girls, Men, and Women. The dataset includes a `fashion.csv` file with metadata such as title, description, category, and gender. It is suitable for various applications like category classification, visual similarity-based recommendation systems, custom named entity recognition for attributes like color and gender. Bellow, there are some samples from the [Image Dataset for E-commerce Applications](https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images/data):
 
 <p align="center">
-  <img width="700" alt="Dataset" src="https://github.com/user-attachments/assets/ad1b3888-8c72-4362-babf-ac79382bb0f7">
+  <img width="700" alt="Dataset Pipeline" src="https://github.com/user-attachments/assets/ff2f586d-50ac-4c7c-8cd6-327a043d9174">
 </p> 
 
-The dataset's high-resolution images and metadata support better product organization and customer recommendations on e-commerce platforms. This dataset is a useful for developing machine learning models and algorithms focused on improving product image recognition and recommendation systems.
+### 1. Analyzing the Image with Phi-3 Vision
+
+<p align="center">
+  <img width="700" alt="Dataset" src="https://github.com/user-attachments/assets/0ca50ae0-5b0c-4129-bcf2-3481b4307234">
+</p> 
+
+The approach of Datafree distillation using Phi-3 Vision focuses on generating synthetic datasets by creating concise, structured descriptions of fashion items from images. This method involves analyzing an image to extract the most relevant attributes of a fashion item, such as its gender association, category, color, and intended usage. The goal is to produce a clear and concise textual description that accurately represents the item without including unnecessary details, such as the person wearing the item or any text within the image. The descriptions are formatted in a simple JSON structure, which makes them easy to integrate into various data processing or machine learning workflows. Below is the prompt used to instruct Phi-3 Vision in generating these descriptions:
+
+
+```html
+<|user|>
+
+<|image_1|>
+
+Analyze the image and provide a concise description of the fashion item it contains. Focus solely on the item,
+not the person wearing or using it, and concentrate on the most prominent or important item in the image.
+The description should include details such as gender, category, subcategory, product type, color, and usage.
+The output should be in the following JSON format, where the description is a brief text string:
+
+Exemple 1:
+
+{
+  "description": "A pink women's blouse with lace trim, perfect for formal occasions."
+}
+
+
+Exemple 2:
+
+
+{
+  "description": "Black men's casual leather shoes, ideal for everyday use."
+}
+
+
+Exemple 3:
+
+{
+  "description": "Gold girls' necklace with a heart pendant, suitable for parties."
+}
+
+
+Please ensure the description is concise, capturing the essential attributes of the fashion item, and
+formatted as plain text within a JSON structure, following the provided examples.
+
+Do not write the text that is in the image. For exemple, if some text is in the image, ignore it.
+
+<|end|>
+<|assistant|>
+```
+
+The expected output from this prompt is a concise, structured JSON object that provides a detailed description of the fashion item depicted in the image. Each description should focus on the essential attributes of the item, such as its type, color, and intended use, while ignoring irrelevant details like the wearer or any visible text. The ultimate goal is to create a synthetic dataset of fashion item descriptions that can be used to train machine learning models or enhance product databases. By ensuring that the descriptions are both accurate and standardized, this approach helps to generate high-quality data that can improve the performance our algorithm.
 
 
 ### MODA Architecture
