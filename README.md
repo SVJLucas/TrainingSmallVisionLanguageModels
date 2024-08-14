@@ -108,7 +108,7 @@ The culmination of this meticulous process is the creation of a final dataset th
 MODA (Multimodal Object Description Assistant) uses a specialized architecture to generate detailed descriptions of fashion items by combining FashionCLIP[17] for image encoding and OPT-125M[18] as decoder for text generation. Its non-linear projection increases and then reduces the dimensionality of image embeddings, capturing complex patterns and enhancing representation quality. This approach allows MODA to deliver accuracy in fashion-specific tasks with only 280 million parameters, making it efficient and capable of running without a GPU.
 
 <p align="center">
-  <img width="700" alt="Architecture" src="https://github.com/user-attachments/assets/43b201d3-b1ee-402d-9a4a-2a6f66c2476d">
+  <img width="900" alt="Architecture" src="https://github.com/user-attachments/assets/19736613-efd0-4610-830d-918b9ddc126f">
 </p> 
 
 In comparison, models like LLaVA[6] and PaLI[7] adopt a more versatile approach, leveraging pretrained backbones to align visual and textual modalities for a wide range of tasks. LLaVA[6] integrates CLIP[8] and Vicuna[9] with a simple linear projection for efficient resource utilization, while PaLI combines Vision Transformers (ViT)[10] and mT5[11] models also via linear transformation for the same reason. Since MODA is a small model, the use of non-linearity does not impact resource utilization significantly. MODA’s non-linear projection method provides a distinct advantage in capturing intricate visual details, enhancing its performance in generating accurate and detailed descriptions compared to the linear projections used by other models.
