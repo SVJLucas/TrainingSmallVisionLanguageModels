@@ -94,7 +94,7 @@ The refinement process carried out by Phi-3 Instruct is essential because it not
 
 - **Why it Matters:** This refinement step is crucial because it ensures that the final dataset is both detailed and aligned with the necessary categorizations. By removing any irrelevant OCR text and integrating metadata through sophisticated refinement techniques, the resulting dataset becomes a powerful tool for advanced machine learning applications. This meticulous approach guarantees that the dataset is clean, focused, and ready for use in training AI models, thereby enhancing their accuracy and effectiveness.
 
-### Final Step: **Creating the Final Dataset**
+### Step 3: **Creating the Final Dataset**
 
 The culmination of this meticulous process is the creation of a final dataset that pairs each refined item description with its corresponding image. By integrating the outputs from Phi-3 Vision and Phi-3 Instruct, we ensure that each fashion item is represented with both visual and textual precision. The images provide the necessary visual context, while the descriptions, refined through the use of metadata and advanced processing techniques, encapsulate the most relevant features of each item in a concise and structured format.
 
