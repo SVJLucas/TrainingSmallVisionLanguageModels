@@ -97,7 +97,7 @@ This prompt instructs the model to analyze the image and produce a brief yet com
 However, **it’s important to note that Phi-3 Vision was initially trained with a strong focus on Optical Character Recognition (OCR)**. For exemple, if we took the image from the training sampled data, as bellow:
 
 <p align="center">
-  <img width="400" alt="Dataset" src="https://github.com/user-attachments/assets/5b05da3c-d9f3-458a-ae67-5fa378836eea">
+  <img width="400" alt="Sample Item" src="https://github.com/user-attachments/assets/5b05da3c-d9f3-458a-ae67-5fa378836eea">
 </p>
 
 
@@ -105,7 +105,7 @@ Phi-3 Vision will output the following result:
 
 
 <p align="center">
-  <img width="700" alt="Dataset" src="https://github.com/user-attachments/assets/7c1375e3-d27c-48e6-af6f-76b513ac8c7c">
+  <img width="700" alt="Sample Item Description by Phi-3 Vision" src="https://github.com/user-attachments/assets/7c1375e3-d27c-48e6-af6f-76b513ac8c7c">
 </p> 
 
 
@@ -114,6 +114,12 @@ This presents a challenge because the inclusion of text from the image is not de
 
 
 ### Step 2: **Refining the Description with Metadata Using Phi-3 Instruct**
+
+<p align="center">
+  <img width="1000" alt="Pipeline's Second Part" src="https://github.com/user-attachments/assets/a148bcb2-5ab2-4c76-a8d3-67aee142c919">
+</p> 
+
+
 
 Once the initial description is generated, it is then combined with a second template, "Prompt II," along with additional item metadata (e.g., gender, master category, subcategory, article type, and usage). This enriched data is fed into Phi-3 Instruct, which refines the initial description to ensure it aligns perfectly with the provided metadata, creating a comprehensive and accurate final description.
 
