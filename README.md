@@ -96,66 +96,14 @@ The refinement process carried out by Phi-3 Instruct is essential because it not
 
 ### Final Step: **Creating the Final Dataset**
 
-Finally, the refined item description is paired with the original item image to form the final dataset. This dataset is now ready for use in various applications, such as training AI models, product recommendation systems, or cataloging.
+The culmination of this meticulous process is the creation of a final dataset that pairs each refined item description with its corresponding image. By integrating the outputs from Phi-3 Vision and Phi-3 Instruct, we ensure that each fashion item is represented with both visual and textual precision. The images provide the necessary visual context, while the descriptions, refined through the use of metadata and advanced processing techniques, encapsulate the most relevant features of each item in a concise and structured format.
 
-- **Why it Matters:** The final dataset, consisting of both high-quality images and precisely refined descriptions, is a valuable resource for any data-driven application in the fashion industry. This step ensures that all the work done in previous steps culminates in a dataset that is both useful and reliable for real-world applications.
-
-
-This dataset contains over 2900 product images, categorized under Apparel and Footwear, and includes items for Boys, Girls, Men, and Women. The dataset includes a `fashion.csv` file with metadata such as title, description, category, and gender. It is suitable for various applications like category classification, visual similarity-based recommendation systems, custom named entity recognition for attributes like color and gender. Bellow, there are some samples from the [Image Dataset for E-commerce Applications](https://www.kaggle.com/datasets/vikashrajluhaniwal/fashion-images/data):
+- **Why it Matters:** The significance of this final dataset cannot be overstated. It serves as a robust and versatile resource that can be leveraged across various data-driven applications in the fashion industry, from training AI models to enhancing product recommendation systems and streamlining catalog management. By ensuring that the dataset is both accurate and comprehensive, this step guarantees that the insights and efficiencies gained from the earlier stages of the process are fully realized in practical, real-world scenarios. Ultimately, this high-quality dataset is a cornerstone for driving innovation and improving performance in a competitive and data-centric market.
 
 
 
-### 1. Analyzing the Image with Phi-3 Vision
 
-
-The approach of Datafree distillation using Phi-3 Vision focuses on generating synthetic datasets by creating concise, structured descriptions of fashion items from images. This method involves analyzing an image to extract the most relevant attributes of a fashion item, such as its gender association, category, color, and intended usage. The goal is to produce a clear and concise textual description that accurately represents the item without including unnecessary details, such as the person wearing the item or any text within the image. The descriptions are formatted in a simple JSON structure, which makes them easy to integrate into various data processing or machine learning workflows. Below is the prompt used to instruct Phi-3 Vision in generating these descriptions:
-
-
-```html
-<|user|>
-
-<|image_1|>
-
-Analyze the image and provide a concise description of the fashion item it contains. Focus solely on the item,
-not the person wearing or using it, and concentrate on the most prominent or important item in the image.
-The description should include details such as gender, category, subcategory, product type, color, and usage.
-The output should be in the following JSON format, where the description is a brief text string:
-
-Exemple 1:
-
-{
-  "description": "A pink women's blouse with lace trim, perfect for formal occasions."
-}
-
-
-Exemple 2:
-
-
-{
-  "description": "Black men's casual leather shoes, ideal for everyday use."
-}
-
-
-Exemple 3:
-
-{
-  "description": "Gold girls' necklace with a heart pendant, suitable for parties."
-}
-
-
-Please ensure the description is concise, capturing the essential attributes of the fashion item, and
-formatted as plain text within a JSON structure, following the provided examples.
-
-Do not write the text that is in the image. For exemple, if some text is in the image, ignore it.
-
-<|end|>
-<|assistant|>
-```
-
-The expected output from this prompt is a concise, structured JSON object that provides a detailed description of the fashion item depicted in the image. Each description should focus on the essential attributes of the item, such as its type, color, and intended use, while ignoring irrelevant details like the wearer or any visible text. The ultimate goal is to create a synthetic dataset of fashion item descriptions that can be used to train machine learning models or enhance product databases. By ensuring that the descriptions are both accurate and standardized, this approach helps to generate high-quality data that can improve the performance our algorithm.
-
-
-### MODA Architecture
+## MODA Architecture
 
 MODA (Multimodal Object Description Assistant) uses a specialized architecture to generate detailed descriptions of fashion items by combining FashionCLIP[17] for image encoding and OPT-125M[18] as decoder for text generation. Its non-linear projection increases and then reduces the dimensionality of image embeddings, capturing complex patterns and enhancing representation quality. This approach allows MODA to deliver accuracy in fashion-specific tasks with only 280 million parameters, making it efficient and capable of running without a GPU.
 
