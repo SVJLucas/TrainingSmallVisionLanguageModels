@@ -49,46 +49,9 @@ Creating high-quality datasets is crucial for training machine learning models, 
 
 The first step in the dataset creation pipeline leverages the power of Phi-3 Vision to generate concise and structured descriptions of fashion items directly from images. This process is based on the principle of Datafree distillation, which aims to create synthetic datasets by extracting the most relevant attributes of a fashion item, such as its gender association, category, color, and intended usage. The approach focuses solely on the item itself, deliberately ignoring unnecessary details like the person wearing the item or any visible text within the image. This ensures that the resulting descriptions are both clear and focused, capturing only the essential characteristics of the item. To guide Phi-3 Vision in this task, the item image is combined with a carefully crafted template, shown bellow:
 
-```html
-<|user|>
-
-<|image_1|>
-
-Analyze the image and provide a concise description of the fashion item it contains. Focus solely on the item,
-not the person wearing or using it, and concentrate on the most prominent or important item in the image.
-The description should include details such as gender, category, subcategory, product type, color, and usage.
-The output should be in the following JSON format, where the description is a brief text string:
-
-Exemple 1:
-
-{
-  "description": "A pink women's blouse with lace trim, perfect for formal occasions."
-}
-
-
-Exemple 2:
-
-
-{
-  "description": "Black men's casual leather shoes, ideal for everyday use."
-}
-
-
-Exemple 3:
-
-{
-  "description": "Gold girls' necklace with a heart pendant, suitable for parties."
-}
-
-
-Please ensure the description is concise, capturing the essential attributes of the fashion item, and
-formatted as plain text within a JSON structure, following the provided examples.
-
-Do not write the text that is in the image. For exemple, if some text is in the image, ignore it.
-
-<|end|>
-<|assistant|>
-```
+<p align="center">
+  <img width="700" alt="Prompt I" src="https://github.com/user-attachments/assets/b1934cc2-9031-4f21-95e6-10778af499db">
+</p> 
 
 This prompt instructs the model to analyze the image and produce a brief yet comprehensive description that encapsulates the item's key features. The output is formatted in a simple JSON structure, making it easy to integrate into various data processing or machine learning workflows. For example, Phi-3 Vision might generate a description like "A pink women's blouse with lace trim, perfect for formal occasions," capturing the item's color, gender association, and appropriate usage.
 
@@ -121,9 +84,15 @@ This presents a challenge because the inclusion of text from the image is not de
 
 
 
-Once the initial description is generated, it is then combined with a second template, "Prompt II," along with additional item metadata (e.g., gender, master category, subcategory, article type, and usage). This enriched data is fed into Phi-3 Instruct, which refines the initial description to ensure it aligns perfectly with the provided metadata, creating a comprehensive and accurate final description.
+After generating the initial description with Phi-3 Vision, the process moves into the refinement stage, where the description is combined with additional metadata to create a more precise and comprehensive final output. This is achieved by feeding the initial description and metadata into a second template, "Prompt II," designed to guide Phi-3 Instruct in refining the description, as shown bellow. The metadata includes key details about the item, such as gender, master category, subcategory, article type, and usage, which are crucial for ensuring that the final description is both accurate and contextually relevant, avoiding possible hallucinations from Phi-3 Vision.
 
-- **Why it Matters:** This refinement step is crucial as it enhances the initial description with deeper context and specificity, ensuring that the final dataset is both detailed and aligned with the necessary categorizations. By integrating metadata and applying sophisticated refinement techniques, the resulting dataset becomes a powerful tool for advanced machine learning applications.
+<p align="center">
+  <img width="700" alt="Prompt II" src="https://github.com/user-attachments/assets/e6db2654-3519-4604-a57d-c7c4cdf8487e">
+</p> 
+
+The refinement process carried out by Phi-3 Instruct is essential because it not only enhances the description by integrating these additional data points but also addresses potential issues that may arise from the initial analysis. As mentioned before, Phi-3 Vision was trained with a strong focus on Optical Character Recognition (OCR), which might cause it to include unwanted text from the image in the description. Since this text is not relevant to our dataset and could complicate the training of other Vision-Language Models (VLMs), Phi-3 Instruct plays a vital role in filtering out any OCR-derived content. By doing so, it ensures that the final dataset is free from unnecessary elements and fully aligned with the intended use case.
+
+- **Why it Matters:** This refinement step is crucial because it ensures that the final dataset is both detailed and aligned with the necessary categorizations. By removing any irrelevant OCR text and integrating metadata through sophisticated refinement techniques, the resulting dataset becomes a powerful tool for advanced machine learning applications. This meticulous approach guarantees that the dataset is clean, focused, and ready for use in training AI models, thereby enhancing their accuracy and effectiveness.
 
 ### Final Step: **Creating the Final Dataset**
 
