@@ -134,11 +134,74 @@ The training chart shows a sharp decline in both training and validation losses 
 
 ## Evaluation
 
+After training, a comprehensive evaluation framework designed to assess the performance of MODA is presented. The model is evaluated across five critical metrics: **Color Accuracy**, **Style Recognition**, **Category Accuracy**, **Gender Accuracy**, and **Factual Consistency**. This framework ensures that the model generates accurate and relevant descriptions, which are crucial for diverse applications. The evaluation process is performed by GPT-4o mini, acting as an impartial assessor, in the test set images. Below, we detail the methodology and scoring system employed in the evaluation.
+
+### 1. **Color Accuracy**
+
+**Definition**: The accuracy with which the model identifies the colors present in a fashion item. This metric is vital for the correct representation of the item's visual characteristics.
+
+**Scoring Methodology**: 
+- The model is scored on a scale from 0 to 10 based on the ratio of correctly identified colors to the total number of colors in the item.
+
+  <p align="center">
+    <img width="300" alt="Training Chart" src="https://github.com/user-attachments/assets/b1a113d9-b2eb-444c-ba02-38f6d3fb9763">
+  </p> 
+
+- For instance, if the item contains three colors and the model accurately identifies two, the score would be calculated as follows:
+  <p align="center">
+    <img width="180" alt="Training Chart" src="https://github.com/user-attachments/assets/bbf505a3-5d4e-4576-9c08-4739ea62a0d4">
+  </p> 
+
+
+### 2. **Style Recognition**
+
+**Definition**: This metric evaluates the model's ability to correctly identify the fashion style of an item, such as whether it is casual, formal, or sporty. Accurate style recognition is crucial for categorizing fashion items within their intended use and audience.
+
+**Scoring Methodology**: 
+- A binary scoring system is employed:
+  - **10** if the style is correctly identified.
+  - **0** if the style is incorrectly identified.
+
+### 3. **Category Accuracy**
+
+**Definition**: Category Accuracy measures the model’s performance in identifying the correct category of the fashion item, such as whether it is classified as a dress, shirt, or pants. This metric is essential for accurate item categorization within a fashion dataset.
+
+**Scoring Methodology**: 
+- Similar to Style Recognition, this metric uses binary scoring:
+  - **10** if the category is correctly identified.
+  - **0** if the category is incorrectly identified.
+
+### 4. **Gender Accuracy**
+
+**Definition**: This metric assesses the model's ability to accurately determine the intended gender for the fashion item, such as whether it is designed for men, women, or is unisex. Accurate gender identification is vital for appropriate product placement and targeting in the fashion industry.
+
+**Scoring Methodology**: 
+- Binary scoring is also applied here:
+  - **10** if the gender is correctly identified.
+  - **0** if the gender is incorrectly identified.
+
+### 5. **Factual Consistency**
+
+**Definition**: Factual Consistency evaluates the model’s accuracy in mentioning relevant details while avoiding hallucinations—incorrect or irrelevant details not present in the image. This metric is critical for ensuring the trustworthiness of the model's outputs.
+
+**Scoring Methodology**: 
+- The score is determined by the proportion of relevant details to the total details mentioned by the model.
+
+  <p align="center">
+    <img width="300" alt="Training Chart" src="https://github.com/user-attachments/assets/1de4bb10-a998-49cc-b7d7-7ee76a824f4f">
+  </p> 
+
+- A score of **10** indicates that no irrelevant details were mentioned, ensuring the output's factual integrity, while a score of **0** indicates that all mentioned details were irrelevant.
+
+The overall grade represents a cumulative assessment of the model's performance across all five metrics. This aggregate score provides a holistic evaluation of the model's capability to accurately and effectively describe fashion items, ensuring both precision and relevance in its outputs. The evaluation across all metrics can be seen in the chart below:
 
 <p align="center">
-  <img width="900" alt="Training Chart" src="https://github.com/user-attachments/assets/99588c47-053e-4c02-9dce-431914674f5d">
+  <img width="800" alt="Training Chart" src="https://github.com/user-attachments/assets/99588c47-053e-4c02-9dce-431914674f5d">
 </p> 
 
+This chart illustrates the evolution of the model's performance across several key evaluation metrics as it processes increasing amounts of data, measured in millions of tokens. Metrics such as **Color Accuracy**, **Style Recognition**, **Category Accuracy**, and **Gender Accuracy** exhibit rapid improvement within the first few million tokens, stabilizing at high levels of accuracy early in the training process. These results suggest that the model is particularly adept at learning to identify colors, styles, categories, and gender-related attributes quickly and consistently, with Gender Accuracy reaching near-perfect performance almost immediately.
+
+However, **Factual Consistency** shows a more gradual and variable improvement, indicating that the model had more difficulty maintaining accuracy in detail relevance, with fluctuations suggesting ongoing challenges in reducing hallucinations. The Overall Grade follows the general trend of individual metrics, rising rapidly before stabilizing, reflecting solid overall performance. To address the variability in Factual Consistency, further refinement could involve training the model with the entire dataset or increasing the number of tokens per image, similar to approaches used in models like InternLM-XComposer2-4KHD. This could enhance the model's ability to maintain consistent accuracy in detailed descriptions.
 
 ## References
 
