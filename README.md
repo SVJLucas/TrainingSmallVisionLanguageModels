@@ -34,7 +34,9 @@ MODA is built using FashionCLIP[17], a model that integrates the capabilities of
 
 ## Understanding the Dataset Creation Pipeline
 
-Creating high-quality datasets is crucial for training machine learning models, especially in specialized domains like fashion. The dataset creation pipeline illustrated below demonstrates a multi-step process that leverages advanced models like Phi-3 Vision and Phi-3 Instruct to produce refined and structured datasets.
+Creating high-quality datasets is crucial for training machine learning models, especially in specialized domains like fashion. To achieve this, we leveraged a carefully selected sample from the [Fashion Product Images Dataset](https://www.kaggle.com/datasets/paramaggarwal/fashion-product-images-dataset) available on Kaggle. This dataset is a comprehensive collection of over 44,000 images of fashion products, including detailed metadata such as gender, master category, subcategory, and article type. It serves as a valuable foundation for developing refined and structured datasets that can be utilized in various machine learning applications.
+
+Given the extensive nature of the original dataset, we extracted a representative sample to streamline the dataset creation process while ensuring that the sample retained the diversity and richness of the full dataset. This sample was then used as the input for our multi-step dataset creation pipeline, which incorporates advanced models like Phi-3 Vision and Phi-3 Instruct to enhance and refine the dataset.
 
 <p align="center">
   <img width="700" alt="Dataset Pipeline" src="https://github.com/user-attachments/assets/ff2f586d-50ac-4c7c-8cd6-327a043d9174">
