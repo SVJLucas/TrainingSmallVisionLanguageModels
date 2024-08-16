@@ -132,6 +132,14 @@ The training process uses the AdamW[19] optimizer, which starts with a learning 
 
 The training chart shows a sharp decline in both training and validation losses in the initial steps, indicating rapid learning and convergence. As training progresses, losses continue to decrease and stabilize at lower values, demonstrating effective learning and good generalization to validation data. The close alignment between the training (blue line) and validation (orange line) loss curves suggests that the model is not overfitting and maintains good performance on the validation set.
 
+## Evaluation
+
+
+<p align="center">
+  <img width="900" alt="Training Chart" src="https://github.com/user-attachments/assets/99588c47-053e-4c02-9dce-431914674f5d">
+</p> 
+
+
 ## References
 
 1. Touvron, H., Lavril, T., Izacard, G., Martinet, X., Lachaux, M.-A., Lacroix, T., Rozière, B., Goyal, N., Hambro, E., Azhar, F., Rodriguez, A., Joulin, A., Grave, E., Lample, G. (2023). LLaMA: Open and Efficient Foundation Language Models. arXiv preprint arXiv:2302.13971. [https://arxiv.org/abs/2302.13971](https://arxiv.org/abs/2302.13971)
