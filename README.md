@@ -212,6 +212,11 @@ This chart illustrates the evolution of the model's performance across several k
 
 However, **Factual Consistency** shows a more gradual and variable improvement, indicating that the model had more difficulty maintaining accuracy in detail relevance, with fluctuations suggesting ongoing challenges in reducing hallucinations. The Overall Grade follows the general trend of individual metrics, rising rapidly before stabilizing, reflecting solid overall performance. To address the variability in Factual Consistency, further refinement could involve training the model with the entire dataset or increasing the number of tokens per image, similar to approaches used in models like InternLM-XComposer2-4KHD[23]. This could enhance the model's ability to maintain consistent accuracy in detailed descriptions.
 
+## Conclusion
+
+The **Training Small Vision Language Models** guide provides a practical framework for developing efficient, task-specific Vision-Language Models, with MODA serving as a prime example. By concentrating on smaller, specialized models, this guide illustrates how to effectively combine visual and textual data while minimizing computational requirements. MODA’s ability to deliver precise fashion item descriptions with a lightweight architecture demonstrates the feasibility of creating high-performance models for specific tasks, even in resource-constrained environments. This approach emphasizes the value of tailored AI solutions and opens the door to broader applications in various industries.
+
+
 ## References
 
 1. Touvron, H., Lavril, T., Izacard, G., Martinet, X., Lachaux, M.-A., Lacroix, T., Rozière, B., Goyal, N., Hambro, E., Azhar, F., Rodriguez, A., Joulin, A., Grave, E., Lample, G. (2023). LLaMA: Open and Efficient Foundation Language Models. arXiv preprint arXiv:2302.13971. [https://arxiv.org/abs/2302.13971](https://arxiv.org/abs/2302.13971)
