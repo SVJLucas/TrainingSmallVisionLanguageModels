@@ -127,7 +127,7 @@ The training of the MODA model aims to optimize its ability to generate detailed
 The training process uses the AdamW[19] optimizer, which starts with a learning rate of 1e-3. To ensure the training is efficient, the learning rate is periodically reduced, dropping by a fixed percentage at regular intervals. During training, similar to LLaVA[6], the FashionCLIP[17] encoder had its parameters frozen, and only the non-linear projection and the language model were trained. The model is trained for 20 epochs, taking 1 hour and 44 minutes to train on a Google Colab A100, with gradient accumulation and periodic model saving to ensure stability and performance.
 
 <p align="center">
-  <img width="700" alt="Training Chart" src="https://github.com/user-attachments/assets/85813aac-d8a0-4c7e-9ef9-fb81f5f62b3d">
+  <img width="700" alt="Training Chart" src="https://github.com/user-attachments/assets/6f25ee6b-5a49-4f24-abde-d1df29247f76">
 </p> 
 
 The training chart shows a sharp decline in both training and validation losses in the initial steps, indicating rapid learning and convergence. As training progresses, losses continue to decrease and stabilize at lower values, demonstrating effective learning and good generalization to validation data. The close alignment between the training (blue line) and validation (orange line) loss curves suggests that the model is not overfitting and maintains good performance on the validation set.
