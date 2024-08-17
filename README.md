@@ -2,7 +2,32 @@
 
 Welcome to the **Training Small Vision Language Models** repository. This repository offers a guide and example for training small-scale vision-language models, with a focus on implementing and training MODA (Multimodal Object Description Assistant). MODA is an advanced AI model designed to describe fashion items by effectively combining visual and textual data.
 
-## Vision-Language Models (VLMs)
+
+<p align="center">
+  <img width="900" alt="Architecture" src="https://github.com/user-attachments/assets/ab91f5f9-60e3-462e-b759-8dce3f4fa53c">
+</p> 
+
+## Table of Contents
+
+1. [Introduction to Vision-Language Models (VLMs)](#introduction-to-vision-language-models-vlms)
+2. [MODA - Multimodal Object Description Assistant](#moda---multimodal-object-description-assistant)
+3. [Understanding the Dataset Creation Pipeline](#understanding-the-dataset-creation-pipeline)
+    - [Step 1: Generating an Initial Image Description with Phi-3 Vision](#step-1-generating-an-initial-image-description-with-phi-3-vision)
+    - [Step 2: Refining the Description with Metadata Using Phi-3 Instruct](#step-2-refining-the-description-with-metadata-using-phi-3-instruct)
+    - [Step 3: Creating the Final Dataset](#step-3-creating-the-final-dataset)
+4. [MODA Architecture](#moda-architecture)
+5. [Training](#training)
+6. [Evaluation](#evaluation)
+    - [1. Color Accuracy](#1-color-accuracy)
+    - [2. Style Recognition](#2-style-recognition)
+    - [3. Category Accuracy](#3-category-accuracy)
+    - [4. Gender Accuracy](#4-gender-accuracy)
+    - [5. Factual Consistency](#5-factual-consistency)
+7. [Conclusion](#conclusion)
+8. [References](#references)
+
+
+## Introduction to Vision-Language Models (VLMs)
 
 <p align="center">
   <img width="700" alt="VLMs" src="https://github.com/user-attachments/assets/07788713-90e6-4d7b-b083-415502745688">
