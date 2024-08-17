@@ -7,6 +7,8 @@ Welcome to the **Training Small Vision Language Models** repository. This reposi
   <img width="900" alt="Architecture" src="https://github.com/user-attachments/assets/ab91f5f9-60e3-462e-b759-8dce3f4fa53c">
 </p> 
 
+MODA leverages state-of-the-art technologies to integrate image and text analysis, offering powerful capabilities for the fashion industry and other applications where detailed object descriptions are crucial.
+
 ## Table of Contents
 
 1. [Introduction to Vision-Language Models (VLMs)](#introduction-to-vision-language-models-vlms)
